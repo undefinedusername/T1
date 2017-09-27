@@ -11,6 +11,7 @@ Game.EntityMixins.PlayerActor = {
         }
         this._acting = true;
         this.addTurnHunger();
+	this.addTurnThirst();
         // Detect if the game is over
         if (!this.isAlive()) {
             Game.Screen.playScreen.setGameEnded(true);

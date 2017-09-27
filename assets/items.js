@@ -59,13 +59,24 @@ Game.ItemRepository.define('rock', {
 // Weapons
 Game.ItemRepository.define('dagger', {
     name: 'dagger',
-    character: '|',
+    character: 'ᵻ',
     foreground: 'gray',
     attackValue: 5,
     wieldable: true,
     mixins: [Game.ItemMixins.Equippable]
 }, {
     disableRandomCreation: true
+});
+
+Game.ItemRepository.define('whip', {
+   name: 'whip',
+   character: 'ƾ',
+	foreground: 'brown',
+	attackValue: 4.5,
+	wieldable: true,
+	mixins: [Game.ItemMixins.Equippable]
+}, {
+	disableRandomCreation: false
 });
 
 Game.ItemRepository.define('sword', {

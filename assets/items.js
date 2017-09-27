@@ -12,11 +12,10 @@ Game.ItemRepository.define('Bottle Of Water', {
 	name: 'Water bottle',
 	character: 'W',
 	foreground: 'blue',
-	//thirstValue: 25,
-	foodValue: 25,
-	//consumptions: 'unlimited',
+	thirstValue: 25,
 	consumptions: 10,
-	mixins: [/*Game.ItemMixins.Drinkable*/Game.ItemMixins.Edible]
+	isPoison: false,
+	mixins: [Game.ItemMixins.Drinkable]
 });
 
 Game.ItemRepository.define('melon', {

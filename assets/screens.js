@@ -88,7 +88,7 @@ Game.Screen.playScreen = {
         var hungerState = this._player.getHungerState();
 	var thirstState = this._player.getThirstState();
         display.drawText(screenWidth - hungerState.length, screenHeight, hungerState);
-	display.drawText(screenWidth - thirstState.length, screenHeight + 10, thirstState);
+	display.drawText(screenWidth - thirstState.length, screenHeight - 10, thirstState);
     },
     getScreenOffsets: function() {
         // Make sure we still have enough space to fit an entire game screen
@@ -203,6 +203,11 @@ Game.Screen.playScreen = {
                 // Show the drop screen
                 this.showItemsSubScreen(Game.Screen.eatScreen, this._player.getItems(),
                    'You have nothing to eat.');
+                return;
+			} else if (inputData.keyCode === ROT.VK_M) {
+                // Show the drink screen
+                this.showItemsSubScreen(Game.Screen.drinkScreen, this._player.getItems(),
+                   'You have nothing to drink.');
                 return;
             } else if (inputData.keyCode === ROT.VK_W) {
                 if (inputData.shiftKey) {
@@ -532,6 +537,26 @@ Game.Screen.eatScreen = new Game.Screen.ItemListScreen({
         var item = selectedItems[key];
         Game.sendMessage(this._player, "You eat %s.", [item.describeThe()]);
         item.eat(this._player);
+        if (!item.hasRemainingConsumptions()) {
+            this._player.removeItem(key);
+        }
+        return true;
+    }
+});
+
+Game.Screen.drinkScreen = new Game.Screen.ItemListScreen({
+    caption: 'Choose the item you wish to drink',
+    canSelect: true,
+    canSelectMultipleItems: false,
+    isAcceptable: function(item) {
+        return item && item.hasMixin('Drinkable');
+    },
+    ok: function(selectedItems) {
+        // Eat the item, removing it if there are no consumptions remaining.
+        var key = Object.keys(selectedItems)[0];
+        var item = selectedItems[key];
+        Game.sendMessage(this._player, "You Drink %s.", [item.describeThe()]);
+        item.drink(this._player);
         if (!item.hasRemainingConsumptions()) {
             this._player.removeItem(key);
         }

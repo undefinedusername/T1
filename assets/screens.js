@@ -86,7 +86,9 @@ Game.Screen.playScreen = {
         display.drawText(0, screenHeight, stats);
         // Render hunger state
         var hungerState = this._player.getHungerState();
+	var thirstState = this._player.getThirstState();
         display.drawText(screenWidth - hungerState.length, screenHeight, hungerState);
+	display.drawText(screenWidth - thirstState.length, screenHeight + 10, thirstState);
     },
     getScreenOffsets: function() {
         // Make sure we still have enough space to fit an entire game screen

@@ -541,6 +541,47 @@ Game.EntityMixins.FoodConsumer = {
         }
     }
 };
+Game.EntityMixins.DrinkConsumer = {
+    name: 'DrinkConsumer',
+    init: function(template) {
+        this._maxThirst = template['maxThirst'] || 1000;
+        // Start halfway to max fullness if no default value
+        this._thirst = template['thirst'] || (this._maxthirst / 2);
+        // Number of points to decrease fullness by every turn.
+        this._thirstDepletionRate = template['thirstDepletionRate'] || 1;
+    },
+    addTurnThirst: function() {
+        this.modifyThirstBy(-this._ThirstDepletionRate);
+    },
+    modifyThirstBy: function(points) {
+        this._thirst = this._thirst + points;
+        if (this._thirst <= 0) {
+            this.kill("You have Dehydrated to death!");
+        } else if (this._thirst > this._maxThirst) {
+            this.kill("You Drank Too Much and Got Water Poisoning!");
+        }
+    },
+    getThirstState: function() {
+        
+        var perPercent = this._maxThirst / 100;
+       
+        if (this._thirst <= perPercent * 5) {
+            return '----Dehydrated----';
+       
+        } else if (this._fullness <= perPercent * 25) {
+            return '----Thirsty----';
+       
+        } else if (this._fullness >= perPercent * 95) {
+            return '----Water Poisoned----';
+        
+        } else if (this._thirst >= perPercent * 75) {
+            return '----Hydrated----';
+      
+        } else {
+            return '----Not Thirsty----';
+        }
+    }
+};
 
 Game.EntityMixins.CorpseDropper = {
     name: 'CorpseDropper',

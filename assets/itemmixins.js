@@ -36,19 +36,24 @@ Game.ItemMixins.Edible = {
 };
 
 //Drinkable mixins WIP
-/*
+
 Game.ItemMixins.Drinkable = {
 	name: 'Drinkable',
 	init: function(template){
 		this._thirstValue = template['thirstValue'] || 20;
 		this._maxConsumptions = template['consumptions'] || 5;
+		this._isPoison = template['isPoision'] || false;
 		this._remainingConsumptions = this._maxConsumptions;
 	},
 	drink: function(entity){
-		if(entity.hasMixin('drinkConsumer')) {
+		if(entity.hasMixin('DrinkConsumer')) {
 			if (this.hasRemainingConsumptions()){
-				entity.modifyFullnessBy(this._thirstValue);
-				this._remainingConsumptions--;
+				if (this._isPosion == true){
+					entity.kill("You Drank Poison!");
+				}else{
+					entity.modifyThirstBy(this._thirstValue);
+					this._remainingConsumptions--;
+				}
 			}
 		}
 	},
@@ -64,11 +69,11 @@ Game.ItemMixins.Drinkable = {
 	},
 	listeners: {
 		'details': function() {
-			return [{key: 'food', value: this._thirstValue}]
+			return [{key: 'drink', value: this._thirstValue}]
 		}
 	}
 };
-*/
+
 
 // Equipment mixins
 Game.ItemMixins.Equippable = {

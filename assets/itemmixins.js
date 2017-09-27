@@ -69,7 +69,7 @@ Game.ItemMixins.Drinkable = {
 	},
 	listeners: {
 		'details': function() {
-			return [{key: 'drink', value: this._thirstValue}]
+			return [{key: 'food', value: this._thirstValue}]
 		}
 	}
 };

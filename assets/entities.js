@@ -4,6 +4,7 @@ Game.PlayerTemplate = {
      character: '@',
     foreground: 'purple',
     maxHp: 60,
+    maxThirst: 1000,
     attackValue: 10,
     sightRadius: 10,
     inventorySlots: 22,

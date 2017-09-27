@@ -9,7 +9,7 @@ Game.PlayerTemplate = {
     inventorySlots: 22,
     mixins: [Game.EntityMixins.PlayerActor,
              Game.EntityMixins.Attacker, Game.EntityMixins.Destructible,
-             Game.EntityMixins.InventoryHolder, Game.EntityMixins.FoodConsumer,/* Game.EntityMixins.drinkConsumer,*/
+             Game.EntityMixins.InventoryHolder, Game.EntityMixins.FoodConsumer,Game.EntityMixins.drinkConsumer,
              Game.EntityMixins.Sight, Game.EntityMixins.MessageRecipient,
              Game.EntityMixins.Equipper,
              Game.EntityMixins.ExperienceGainer, Game.EntityMixins.PlayerStatGainer]
